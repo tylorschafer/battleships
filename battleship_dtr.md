@@ -1,6 +1,6 @@
 # DTR: Define the Relationship
 
-Use this template to when conducting DTR with your project partners. *It's recommended that you copy/paste this template into your own gist each time you conduct a DTR to take notes on the conversation.* 
+Use this template to when conducting DTR with your project partners.
 
 ### Guiding Questions to Define The Relationship:
 
@@ -13,7 +13,7 @@ Corina: I communicate best directly and with as much data and information as pos
 Tylor: Direct feedback, no hostility. Conceptualization first is best as well. When communication problems, concrete examples whenever possible is prefered. Slack messages whenever is fine.
 * How would you describe your work style?
 Tylor: Hybrid: once in a while collaborating together is important but I also get a lot of good work done independently.
-Corina: Independent is often how I prefer to work although I do need and want input occasionally. 
+Corina: Independent is often how I prefer to work although I do need and want input occasionally.
 * What are each of our strengths? How can our strengths complement each other?
 Both good at working independently makes it easier to agree to divide and conquer. Also, we both had Lover of Moderation and Objective Analytical as our top Pairin characteristics therefore we both approach the problem in a very similar fashion.
 * What’s gone well or poorly in your previous projects?
@@ -56,7 +56,7 @@ Project: Battleship
 Group Member Names: Corina Allen & Tylor Schafer
 
 Goals and Expectations for the Project (What does each group member hope to get out of this project? What do we want to achieve as a team? How will we know that we're successful?): As a team, we want to ensure both members have a full understanding of the concepts and technical skills of this project. As the overachievers we both identify as, we will feel successful when we've completed up to Iteration 3 and put our solid effort into completing as much as possible on Iteration 4. We also are going to strive for a 4 in each category on the graded rubric.
-	
+
 Team strengths & collaboration styles (consider discussing your Pairin qualities here): Both of us had Objective Analytical and Lover of Moderation as our top Pairin qualities meaning we both have a similar approach. We've agreed that Divide-and-Conquer will be used often with some paired programming done when we can come together on campus to work.
 
 How we can use our strengths to overcome obstacles: Corina is solution oriented and Tylor prefers positive reinforcement so together we should be able to overcome obstacles fairly easily with our analytical approaches and optimistic attitudes.
@@ -67,7 +67,7 @@ Communication Expectations (How and often will we communicate? How do we keep li
 
 Abilities & Growth Expectations (Technical strengths and areas for desired improvement): Tylor feels solid in method definitions and is shaky with TDD while Corina is confidant in TDD but wants to strengthen her testing of fringe cases and negative variations.
 
-Workload Expectations (What features do we each want to work on?): Ship Class will be Corina and Cells Class will be Tylor to start. 
+Workload Expectations (What features do we each want to work on?): Ship Class will be Corina and Cells Class will be Tylor to start.
 
 Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests/Debugging and Problem-solving Techniques): No one merges their own code. We will submit a Pull Request when ready to Merge in our Branch. The partner will review the code and then merge when ready. Because the Ship and Cells interact, once we are half way through with each of our classes, we will submit PR so the other can work on their code with access to the class. When Merge Conflict, we will either pair program in person or via a Slack call to discuss what to keep and what can be removed.  
 
