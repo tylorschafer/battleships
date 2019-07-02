@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-#require './lib/ship'
+require './lib/ship'
 require './lib/cell'
 
 
@@ -26,6 +26,7 @@ class CellTest < Minitest::Test
   end
 
   def test_cell_starts_empty
+    skip
     assert_equal true, @cell.empty?
   end
 
