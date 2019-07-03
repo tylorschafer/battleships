@@ -33,10 +33,10 @@ class Coordinates
   end
 
   def add_x_and_y
+    @y_array.each do |num|
     @x_array.each do |letter|
-      index = 0
-      @coords << @x_array[index] + @y_array[index]
-      index += 1
+      @coords << letter + @y_array[num.to_i - 1]
+    end
     end
     @coords
   end
