@@ -41,6 +41,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_coordinates_are_not_diagonal
+    skip
     assert_equal false, @board.valid_placement?(@cruiser, [:A3, :B2, :C1])
     assert_equal false, @board.valid_placement?(@submarine, [:C2, :D3])
   end
