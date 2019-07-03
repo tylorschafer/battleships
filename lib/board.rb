@@ -1,3 +1,4 @@
+
 class Board
   attr_reader :cells, :cell
 
@@ -23,9 +24,36 @@ class Board
     @cell = cell
   end
 
+  def consecutive_placement(array = [])
+    chars_array = array.map do |element|
+      element.to_s.chars
+    end
+    numbers_array = chars_array.flatten.find_all do |char|
+      char.to_i != 0
+    end
+    if numbers_array.count == 5 && numbers_array.last.to_i - numbers_array.first.to_i <= 4
+        true
+      elsif numbers_array.count == 4 && numbers_array.last.to_i - numbers_array.first.to_i <= 3
+        true
+      elsif numbers_array.count == 3 && numbers_array.last.to_i - numbers_array.first.to_i <= 2
+        true
+      elsif numbers_array.count == 2 && numbers_array.last.to_i - numbers_array.first.to_i <= 1
+        true
+      else
+        false
+    end
+  end
+
   def validate_coordinate?(coord)
     @cells.keys.include?(coord)
   end
 
-  
+
+  def valid_placement?(ship, coordinates = [])
+    if (coordinates.count == ship.health) && (consecutive_placement(coordinates) == true)
+      true
+    else
+      false
+    end
+  end
 end
