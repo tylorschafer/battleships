@@ -25,24 +25,28 @@ class Board
   end
 
   def consecutive_placement(array = [])
-    chars_array = array.map do |element|
-      element.to_s.chars
-    end
-    numbers_array = chars_array.flatten.find_all do |char|
-      char.to_i != 0
-    end
-    if numbers_array.count == 5 && numbers_array.last.to_i - numbers_array.first.to_i <= 4
+    chars_array = array.map{ |element|element.to_s.chars}
+    numbers_array = chars_array.flatten.find_all{ |char|char.to_i != 0}
+    letter_array = chars_array.flatten.find_all{ |char|char.to_i == 0}
+    @count = numbers_array.count
+    @first_num = numbers_array.first.to_i
+    @last_num = numbers_array.last.to_i
+    @first_letter = letter_array.first.ord
+    @last_letter = letter_array.last.ord
+    @letter_sum = letter_array.ord.sum - 64
+    if (@count == 5) && (@last_num - @first_num <= 4) && (@last_letter - @first_letter <= 1)
         true
-      elsif numbers_array.count == 4 && numbers_array.last.to_i - numbers_array.first.to_i <= 3
+      elsif (@count == 4) && (@last_num - @first_num) <= 3 && (@last_letter - @first_letter <= 1)
         true
-      elsif numbers_array.count == 3 && numbers_array.last.to_i - numbers_array.first.to_i <= 2
+      elsif (@count == 3) && (@last_num - @first_num) <= 2 && (@last_letter - @first_letter <= 1)
         true
-      elsif numbers_array.count == 2 && numbers_array.last.to_i - numbers_array.first.to_i <= 1
+      elsif (@count == 2) && (@last_num - @first_num <= 1) && (@last_letter - @first_letter <= 1)
         true
       else
         false
     end
   end
+
 
   def validate_coordinate?(coord)
     @cells.keys.include?(coord)
