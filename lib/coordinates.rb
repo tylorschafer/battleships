@@ -38,5 +38,6 @@ class Coordinates
       @coords << @x_array[index] + @y_array[index]
       index += 1
     end
+    @coords
   end
 end
