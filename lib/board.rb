@@ -25,19 +25,14 @@ class Board
 end
 
 
-# def consecutive_placement(array = [])
-#   split_chars_array = array.map{ |element|element.to_s.chars}
-#   numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
-#   letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0}
-#   nested_con_lets = letter_array.each_cons(2).map {|a| a}
-#   nested_con_nums = numbers_array.each_cons(2).map {|a| a}
-#   @con_letters = nested_con_lets.flatten.uniq.count
-#   @con_numbers = nested_con_nums.flatten.uniq.count
+def consecutive_placement(array = [])
+  split_chars_array = array.map{ |element|element.to_s.chars} (chars splits array into individual elements)
+  numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
+  letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0} sort string into # or letter array
+#   @con_letters = letter_array.flatten.uniq.count flatten and unique to potentially determine if consecutive
+#   @con_numbers = numbers_array.flatten.uniq.count
 #   @ord_letters = letter_array.map {|letter| letter.ord - 64}
-#   @count = array.count
-#   if @con_numbers == @count && @con_letters == 1 || @con_letters == @count && @ord_numbers == 1
-#     true
-#   else
-#     false
-#   end
+#   @count = array.count stored just to reference
 # end
+
+.zip method creates nested array to make coordinates
