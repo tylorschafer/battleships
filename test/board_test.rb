@@ -38,8 +38,8 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_coordinates_same_as_ship_length
-    assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'A2'])
-    assert_equal true, @board.valid_placement?(@submarine, ['A1', 'A2'])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
 
   def test_consecutive_placement
@@ -47,7 +47,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_coordinates_are_consecutive
-    skip
     assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A4'])
     assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
     assert_equal false, @board.valid_placement?(@submarine, ['A1', 'C1'])
@@ -55,7 +54,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_coordinates_are_not_diagonal
-    skip
     assert_equal false, @board.valid_placement?(@cruiser, ['A3', 'B2', 'C1'])
     assert_equal false, @board.valid_placement?(@submarine, ['C2', 'D3'])
   end

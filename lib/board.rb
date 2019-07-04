@@ -22,24 +22,41 @@ class Board
   end
 
   def valid_placement?(ship, coordinates = [])
-    # coordinates.count == ship.health
-    # split_chars_array = coordinates.map{ |element|element.to_s.chars} # (chars splits array into individual elements)
-    # numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
-    # letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0} # sort string into # or letter array
-    # @con_letters = letter_array.flatten.uniq.count # flatten and unique to potentially determine if consecutive
-    # @con_numbers = numbers_array.flatten.uniq.count
-    # @ord_letters = letter_array.map {|letter| letter.ord - 64}
-    # @ord_numbers = numbers_array.map {|number| number.ord - 64}
-    # require "pry"; binding.pry
+    split_chars_array = coordinates.map{ |element|element.to_s.chars}
+    @numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
+    letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0}
+    @con_letters = letter_array.flatten.uniq.count
+    @con_numbers = @numbers_array.flatten.uniq.count
+    @ord_letters = letter_array.map {|letter| letter.ord - 64}
     # # @count = coordinates.count #stored just to reference
     # If all of the conditionals below are true then its truly a valid placement. Code should breakout as soon as it hits false
-    if coordinates.count == ship.health
-    elsif (next conditional statement)
-    elsif (another conditional statement)
-    elsif (next condtional statement)
-    else (final conditional statement)
+    if @coordinates.count == ship.length
+      if @con_letters == 1 && @con_numbers == ship.length
+        if @numbers_array.each do |num|
+            index = 0
+            @numbers_array[index + 1]- @numbers_array[index] == 1
+            index += 1
+          end
+          return true
+        else
+          return false
+        end
+    elsif @con_letters = ship.length && @con_numbers == 1
+      if @ord_letters.each do |num|
+          index = 0
+          @ord_letters[index + 1]- @ord_letters[index] == 1
+          index += 1
+          end
+          return true
+      else
+        return false
+      end
+    else
+      return false
     end
+  else
+    return false
   end
-end
-
+  end
+end 
 # .zip method creates nested array to make coordinates
