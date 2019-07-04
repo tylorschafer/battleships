@@ -43,7 +43,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_consecutive_placement
-    refute @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
   end
 
   def test_valid_placement_coordinates_are_consecutive
