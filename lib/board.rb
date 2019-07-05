@@ -33,14 +33,14 @@ class Board
     if ship_coordinates.count == ship.length
       if @con_letters == 1 && @con_numbers == ship.length
         index = 0
-        if (ship.length - 1).times do
-            @numbers_array[index + 1].to_i - @numbers_array[index].to_i != 1
-            index += 1
-          end
-          return false # FALSE FOR LINE 51 FROM THIS LINE, WHEN THIS IS TRUE 51 WORKS BUT TEST LINES 46 AND 50 DO NOT
-        else
+        (ship.length - 1).times do
+        if @numbers_array[index + 1].to_i - @numbers_array[index].to_i == 1
           return true
+        else
+          return false
         end
+        index += 1
+      end
     elsif @con_letters = ship.length && @con_numbers == 1
       if @ord_letters.each do |num|
           index = 0
