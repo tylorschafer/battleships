@@ -25,52 +25,44 @@ class Board
     ship_coordinates.count == ship.length
   end
 
-  def split_coordinates_to_individual_arrays(ship_coordinates = [])
+  def create_uniq_numbers(ship_coordinates)
     split_chars_array = ship_coordinates.map{ |element|element.chars}
     numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
-    letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0}
-    @uniq_letters = letter_array.flatten.uniq
     @uniq_numbers = numbers_array.flatten.uniq
-    @ord_letters = @uniq_letters.map {|letter| letter.ord - 64}
   end
 
-  def consecutive_numbers(ship)
-    @uniq_letters == 1 && @uniq_numbers == ship.length
+  def create_uniq_letters(ship_coordinates)
+    split_chars_array = ship_coordinates.map{ |element|element.chars}
+    letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0}
+    uniq_letters = letter_array.flatten.uniq
+    @uniq_letters = uniq_letters.map {|letter| letter.ord - 64}
   end
 
-  def consecutive_letters(ship)
-    @uniq_letters == ship.length && @uniq_numbers == 1
-  end
-
-  def valid_placement?(ship, ship_coordinates = [])
-    if check_coordinates_against_length(ship, ship_coordinates) == true
-      if consecutive_numbers(ship) == true
-        (ship.length - 1).times do
-          index = 0
-          if @uniq_numbers[index + 1].to_i - @uniq_numbers[index].to_i == 1
-            return true
-          else
-            return false
-            break
-          end
-          index += 1
-        end
-      elsif consecutive_letters(ship) == true
-        (ship.length - 1).times do
-          index = 0
-          if @ord_letters[index + 1] - @ord_letters[index] == 1
-            return true
-          else
-            return false
-            break
-          end
-          index += 1
-        end
-      else
-        return false
-      end
-    else
+  def consecutive_numbers?(ship)
+    if @uniq_letters.count != 1 || @uniq_numbers.count != ship.length
       return false
+    end
+    @uniq_numbers.each_cons(2).all? do |first, second|
+      second.to_i - first.to_i == 1
+    end
+  end
+
+  def consecutive_letters?(ship)
+    if @uniq_letters.count != ship.length || @uniq_numbers.count != 1
+      return false
+    end
+    @uniq_letters.each_cons(2).all? do |first, second|
+      second - first == 1
+    end
+  end
+
+  def valid_placement?(ship, ship_coordinates)
+    create_uniq_letters(ship_coordinates)
+    create_uniq_numbers(ship_coordinates)
+    if check_coordinates_against_length(ship, ship_coordinates) && (consecutive_letters?(ship) || consecutive_numbers?(ship))
+      return true
+    else
+      false
     end
   end
 end
