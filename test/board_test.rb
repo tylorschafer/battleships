@@ -4,7 +4,6 @@ require './lib/board'
 require './lib/ship'
 require './lib/cell'
 require './lib/coordinates'
-require 'pry'
 
 class BoardTest < Minitest::Test
   def setup
@@ -22,27 +21,33 @@ class BoardTest < Minitest::Test
   end
 
   def test_cells_created
-    assert @board.create_cells.include?('A1')
+    assert @board.cells.include?('A1')
   end
 
   def test_board_has_16_cells_and_each_key_is_cell
-    assert_equal 16, @board.create_cells.count
+    assert_equal 16, @board.cells.count
   end
 
-  def test_validate_coordinate?
-    assert @board.validate_coordinate?('A1')
-    assert @board.validate_coordinate?('D4')
-    refute @board.validate_coordinate?('A5')
-    refute @board.validate_coordinate?('E1')
-    refute @board.validate_coordinate?('A22')
+  def test_valid_coordinate?
+    assert @board.valid_coordinate?('A1')
+    assert @board.valid_coordinate?('D4')
+    refute @board.valid_coordinate?('A5')
+    refute @board.valid_coordinate?('E1')
+    refute @board.valid_coordinate?('A22')
   end
 
   def test_valid_placement_coordinates_same_as_ship_length
-    assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'A2'])
-    assert_equal true, @board.valid_placement?(@submarine, ['A1', 'A2'])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
+  end
+
+  def test_sample
+    assert_equal true, @board.valid_placement?(@cruiser, ['A1','B1','C1'])
+    assert_equal true, @board.valid_placement?(@submarine, ['C1','C2'])
   end
 
   def test_valid_placement_coordinates_are_consecutive
+    skip
     assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A4'])
     assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
     assert_equal false, @board.valid_placement?(@submarine, ['A1', 'C1'])
