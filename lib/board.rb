@@ -58,9 +58,3 @@ class Board
   end
 end
 # .zip method creates nested array to make coordinates
-split_chars_array = ['A1','A2','A3'].map{ |element|element.chars}
-numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
-letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0}
-@uniq_letters = letter_array.flatten.uniq
-@uniq_numbers = numbers_array.flatten.uniq
-@ord_letters = letter_array.map {|letter| letter.ord - 64}
