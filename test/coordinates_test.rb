@@ -8,6 +8,9 @@ class CoordinatesTest < Minitest::Test
 
   def setup
     @coordinates = Coordinates.new
+    @coordinates.x_loader
+    @coordinates.y_loader
+    @coordinates.add_x_and_y
 
   end
 
@@ -32,5 +35,9 @@ class CoordinatesTest < Minitest::Test
     @coordinates.y_loader
 
     assert_equal "A1", @coordinates.add_x_and_y.first
+  end
+
+  def test_coords
+    assert_equal ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"], @coordinates.add_x_and_y
   end
 end

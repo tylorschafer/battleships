@@ -1,13 +1,12 @@
 
 class Coordinates
-  attr_reader :x, :y, :x_array, :y_array, :coords
+  attr_reader :x, :y, :x_array, :y_array
 
   def initialize(x = 4, y = 4)
     @x = x
     @y = y
     @x_array = []
     @y_array = []
-    @coords = []
   end
 
   def to_letter
@@ -33,11 +32,18 @@ class Coordinates
   end
 
   def add_x_and_y
+    coords = []
     @y_array.each do |num|
     @x_array.each do |letter|
-      @coords << letter + @y_array[num.to_i - 1]
+      coords << letter + @y_array[num.to_i - 1]
     end
     end
-    @coords
+    coords.sort
+  end
+
+  def run
+    x_loader
+    y_loader
+    add_x_and_y
   end
 end
