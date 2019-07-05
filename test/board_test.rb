@@ -8,8 +8,12 @@ require './lib/coordinates'
 class BoardTest < Minitest::Test
   def setup
     @board = Board.new
-    @cruiser = Ship.new(:Cruiser, 3)
-    @submarine = Ship.new(:Submarine, 2)
+    @cruiser = Ship.new('Cruiser', 3)
+    @submarine = Ship.new('Submarine', 2)
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @cell_1 = @board.cells["A1"]
+    @cell_2 = @board.cells["A2"]
+    @cell_3 = @board.cells["A3"]
   end
 
   def test_board_exists
@@ -41,7 +45,7 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
 
-  def test_sample
+  def test_additional_placements
     assert_equal true, @board.valid_placement?(@cruiser, ['A1','B1','C1'])
     assert_equal true, @board.valid_placement?(@submarine, ['C1','C2'])
   end
@@ -56,6 +60,18 @@ class BoardTest < Minitest::Test
   def test_valid_placement_coordinates_are_not_diagonal
     assert_equal false, @board.valid_placement?(@cruiser, ['A3', 'B2', 'C1'])
     assert_equal false, @board.valid_placement?(@submarine, ['C2', 'D3'])
+  end
+
+  def test_place_ship
+    assert @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal @cruiser, @cell_1.ship
+    assert_equal @cruiser, @cell_2.ship
+    assert_equal @cruiser, @cell_3.ship
+    assert @cell_3.ship == @cell_2.ship
+  end
+
+  def test_no_overlapping_ships
+    refute @board.valid_placement?(@submarine, ["A1", "B1"])
   end
 
 end

@@ -2,19 +2,19 @@ require './lib/coordinates'
 require './lib/cell'
 
 class Board
-  attr_reader :cell, :coordinates, :cells
+  attr_reader :coordinates, :cells
 
   def initialize
     @coordinates = Coordinates.new.run
-    @cell = cell
-    @cells = Hash.new
+    @cells = create_cells
   end
 
-  def cells
+  def create_cells
+    new_board = Hash.new
     @coordinates.each do |coord|
-      @cells[coord] = Cell.new(coord)
+      new_board[coord] = Cell.new(coord)
     end
-    @cells
+    new_board
   end
 
   def valid_coordinate?(coord)
@@ -65,5 +65,15 @@ class Board
       false
     end
   end
+
+  def place(ship, ship_coordinates)
+    if valid_placement?(ship, ship_coordinates)
+      ship_coordinates.each {|coord| @cells[coord].place_ship(ship)}
+    else
+      p 'Invalid ship placement, please select a different location.'
+    end
+  end
 end
-# .zip method creates nested array to make coordinates
+
+# && ship_coordinates.each {|coord| @cells[coord].empty?}
+# logic for the no test_no_overlapping_ships
