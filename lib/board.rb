@@ -79,18 +79,20 @@ class Board
     uniq_number_cells = @cells.collect {|key,value| key.chars[1].to_i}.uniq
     uniq_letter_cells = @cells.collect {|key, value| key.chars[0]}.uniq
     num = 0
-    rendered_board = @cells.map do |key,value|
+    @rendered_board = @cells.collect do |key,value|
       if key.chars[1].to_i == uniq_number_cells.count
         num += 1
-        value.render + "\n"
-      elsif key.chars[1].to_i == 1
-        uniq_letter_cells[num] + " " + value.render
+        "#{value.render} \n"
+      elsif key.chars[1].to_i == 1 && value.empty? == true
+        "#{uniq_letter_cells[num]} #{value.render}"
+      elsif key.chars[1].to_i == 1 && value.empty? == false
+        "#{uniq_letter_cells[num]} #{value.render(true)}"
       elsif show == true && value.empty? == false
-        value.render(true)
+        "#{value.render(true)}"
       else
-        value.render
+        "#{value.render}"
       end
     end
-    p "  #{uniq_number_cells.join(" ")} \n #{rendered_board.join(' ')}"
+    "  #{uniq_number_cells.join(" ")} \n #{@rendered_board.join(" ")}"
   end
 end
