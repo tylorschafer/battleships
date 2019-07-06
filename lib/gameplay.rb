@@ -21,18 +21,25 @@ def play_game
   @computer_board.create_cells
   @user_board = Board.new
   @user_board.create_cells
-
-
-end
-
-def ship_placement_computer
   @computer_cruiser = Ship.new('Cruiser', 3)
   @computer_submarine = Ship.new('Submarine', 2)
-
-end
-
-def ship_placement_user
   @user_cruiser = Ship.new('Cruiser', 3)
   @user_submarine = Ship.new('Submarine', 2)
-  user_cruiser_placement = rand(@coorindates)
+end
+
+def computer_cruiser_placement
+  start_point = @computer_board.coordinates[rand(@computer_board.coordinates.count)]
+  start_point_array = start_point.chars
+  cruiser_location = [start_point]
+  if rand(1...2) == 1
+    if start_point_array[1].to_i >= @computer_cruiser.length
+      cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i - 1).to_s)
+      cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i - 2).to_s)
+    else start_point_array[1].to_i < @computer_cruiser.length
+      cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i + 1).to_s)
+      cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i + 2).to_s)
+    end
+  else rand(1...2) == 2
+    
+  end
 end
