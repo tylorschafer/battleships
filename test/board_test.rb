@@ -4,6 +4,7 @@ require './lib/board'
 require './lib/ship'
 require './lib/cell'
 require './lib/coordinates'
+require 'pry'
 
 class BoardTest < Minitest::Test
   def setup
@@ -114,6 +115,12 @@ class BoardTest < Minitest::Test
     assert  @board.overlapping_ships?(['B1','B2'])
     refute  @board.valid_placement?(@submarine, ['A1','B1'])
     assert  @board.valid_placement?(@submarine, ['D1','D2'])
+  end
+
+  def test_board_render
+    # assert_equal ' 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n', @board.render
+    @board.place(@cruiser, ['A1','A2','A3'])
+    assert_equal ' 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n', @board.render(true)
   end
 
 end
