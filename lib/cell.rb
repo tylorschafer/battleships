@@ -35,7 +35,7 @@ class Cell
   end
 
   def render(show = false)
-    if show == true
+    if @cell_contents.empty? == false && show == true && @fired_upon == false 
       "S"
     elsif @fired_upon == false && @cell_contents.empty? == true
       "."

@@ -76,17 +76,21 @@ class Board
   end
 
   def render(show = false)
-    numbers = @cells.collect {|key,value| key.chars[1].to_i}
-    letters = @cells.collect {|key, value| key.chars[0]}.uniq
+    uniq_number_cells = @cells.collect {|key,value| key.chars[1].to_i}.uniq
+    uniq_letter_cells = @cells.collect {|key, value| key.chars[0]}.uniq
+    num = 0
     rendered_board = @cells.map do |key,value|
-      if key.chars[1].to_i == 4
-        value.render + " " "\n"
+      if key.chars[1].to_i == uniq_number_cells.count
+        num += 1
+        value.render + "\n"
+      elsif key.chars[1].to_i == 1
+        uniq_letter_cells[num] + " " + value.render
       elsif show == true && value.empty? == false
         value.render(true)
       else
         value.render
       end
     end
-    p "#{numbers.uniq.join(" ")} \n #{rendered_board.join(' ')}"
+    p "  #{uniq_number_cells.join(" ")} \n #{rendered_board.join(' ')}"
   end
 end

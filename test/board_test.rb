@@ -14,6 +14,8 @@ class BoardTest < Minitest::Test
     @cell_1 = @board.cells['A1']
     @cell_2 = @board.cells['A2']
     @cell_3 = @board.cells['A3']
+    @cell_4 = @board.cells['A4']
+    @cell_5 = @board.cells['D4']
   end
 
   def test_board_exists
@@ -120,7 +122,12 @@ class BoardTest < Minitest::Test
   def test_board_render
     # assert_equal ' 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n', @board.render
     @board.place(@cruiser, ['A1','A2','A3'])
-    assert_equal ' 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n', @board.render(true)
+    # assert_equal ' 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n', @board.render(true)
+    @cell_1.fire_upon
+    # assert_equal ' 1 2 3 4 \nA H S S . \nB . . . . \nC . . . . \nD . . . . \n', @board.render(true)
+    @cell_4.fire_upon
+    @cell_5.fire_upon
+    assert_equal " 1 2 3 4 \nA H S S M \nB . . . . \nC . . . . \nD . . . M \n", @board.render(true)
   end
 
 end
