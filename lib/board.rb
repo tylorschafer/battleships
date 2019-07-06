@@ -21,7 +21,7 @@ class Board
     @coordinates.include?(coord)
   end
 
-  def check_coordinates_against_length(ship, ship_coordinates = [])
+  def coordinate_count_equal_to_length?(ship, ship_coordinates = [])
     ship_coordinates.count == ship.length
   end
 
@@ -59,11 +59,15 @@ class Board
   def valid_placement?(ship, ship_coordinates)
     create_uniq_letters(ship_coordinates)
     create_uniq_numbers(ship_coordinates)
-    if check_coordinates_against_length(ship, ship_coordinates) && (consecutive_letters?(ship) || consecutive_numbers?(ship))
+    if coordinate_count_equal_to_length?(ship, ship_coordinates) && overlapping_ships?(ship_coordinates) && (consecutive_letters?(ship) || consecutive_numbers?(ship))
       return true
     else
       false
     end
+  end
+
+  def overlapping_ships?(ship_coordinates)
+    ship_coordinates.all? {|coord| @cells[coord].empty?}
   end
 
   def place(ship, ship_coordinates)

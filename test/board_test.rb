@@ -10,10 +10,9 @@ class BoardTest < Minitest::Test
     @board = Board.new
     @cruiser = Ship.new('Cruiser', 3)
     @submarine = Ship.new('Submarine', 2)
-    @board.place(@cruiser, ["A1", "A2", "A3"])
-    @cell_1 = @board.cells["A1"]
-    @cell_2 = @board.cells["A2"]
-    @cell_3 = @board.cells["A3"]
+    @cell_1 = @board.cells['A1']
+    @cell_2 = @board.cells['A2']
+    @cell_3 = @board.cells['A3']
   end
 
   def test_board_exists
@@ -26,10 +25,14 @@ class BoardTest < Minitest::Test
 
   def test_cells_created
     assert @board.cells.include?('A1')
+    assert @board.cells.include?('D4')
+    refute @board.cells.include?('A5')
+    refute @board.cells.include?('E1')
   end
 
-  def test_board_has_16_cells_and_each_key_is_cell
+  def test_board_has_16_cells_and_key_is_cell
     assert_equal 16, @board.cells.count
+    assert_instance_of Cell, @board.cells['A1']
   end
 
   def test_valid_coordinate?
@@ -40,30 +43,47 @@ class BoardTest < Minitest::Test
     refute @board.valid_coordinate?('A22')
   end
 
-  def test_valid_placement_coordinates_same_as_ship_length
-    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
-    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
+  def test_coordinate_count_equal_to_length?
+    assert @board.coordinate_count_equal_to_length?(@cruiser, ['A1', 'A2', 'A3'])
+    refute @board.coordinate_count_equal_to_length?(@cruiser, ['A1', 'A2'])
+    assert @board.valid_placement?(@submarine, ['A1', 'A2'])
+    refute @board.valid_placement?(@submarine, ['A2', 'A3', 'A4'])
   end
 
-  def test_additional_placements
-    assert_equal true, @board.valid_placement?(@cruiser, ['A1','B1','C1'])
-    assert_equal true, @board.valid_placement?(@submarine, ['C1','C2'])
+  def test_create_uniq_numbers
+    assert ['2','2','2'] != @board.create_uniq_numbers(['A2','B2','C2'])
+    assert ['1','2','3'], @board.create_uniq_numbers(['A1','A2','A3'])
+    assert ['1'], @board.create_uniq_numbers(['A1','B1','C1'])
+    assert ['4'], @board.create_uniq_numbers(['B4','C4','D4'])
   end
 
-  def test_valid_placement_coordinates_are_consecutive
-    assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A4'])
-    assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
-    assert_equal false, @board.valid_placement?(@submarine, ['A1', 'C1'])
-    assert_equal false, @board.valid_placement?(@cruiser, ['A3', 'A2', 'A1'])
+  def test_create_uniq_letters
+    assert [1,1,1] != @board.create_uniq_letters(['A1','A2','A3'])
+    assert [1], @board.create_uniq_letters(['A1','A2','A3'])
+    assert [3], @board.create_uniq_letters(['C1','C2','C3'])
+    assert [1,2,3], @board.create_uniq_letters(['A1','B1','C1'])
+  end
+
+  def test_consecutive_numbers?
+    @board.create_uniq_numbers(['A1','A2','A3'])
+    @board.create_uniq_letters(['A1','A2','A3'])
+    assert @board.valid_placement?(@cruiser, ['A1','A2','A3'])
+    refute @board.valid_placement?(@cruiser, ['A1','A2','A4'])
+    assert @board.valid_p
+  end
+
+  def test_consecutive_letters?
+
+
   end
 
   def test_valid_placement_coordinates_are_not_diagonal
-    assert_equal false, @board.valid_placement?(@cruiser, ['A3', 'B2', 'C1'])
-    assert_equal false, @board.valid_placement?(@submarine, ['C2', 'D3'])
+    refute @board.valid_placement?(@cruiser, ['A3', 'B2', 'C1'])
+    refute @board.valid_placement?(@submarine, ['C2', 'D3'])
   end
 
   def test_place_ship
-    assert @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert @board.place(@cruiser, ['A1', 'A2', 'A3'])
     assert_equal @cruiser, @cell_1.ship
     assert_equal @cruiser, @cell_2.ship
     assert_equal @cruiser, @cell_3.ship
@@ -71,7 +91,11 @@ class BoardTest < Minitest::Test
   end
 
   def test_no_overlapping_ships
-    refute @board.valid_placement?(@submarine, ["A1", "B1"])
+    @board.place(@cruiser, ['A1', 'A2', 'A3'])
+    refute  @board.overlapping_ships?(['A1','A2'])
+    assert  @board.overlapping_ships?(['B1', 'B2'])
+    refute  @board.valid_placement?(@submarine, ['A1', 'B1'])
+    assert  @board.valid_placement?(@submarine, ['D1', 'D2'])
   end
 
 end
