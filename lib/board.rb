@@ -66,16 +66,16 @@ class Board
     end
   end
 
-  def overlapping_ships?(ship_coordinates)
-    ship_coordinates.all? {|coord| @cells[coord].empty?}
-  end
-
   def place(ship, ship_coordinates)
     if valid_placement?(ship, ship_coordinates)
       ship_coordinates.each {|coord| @cells[coord].place_ship(ship)}
     else
       p 'Invalid ship placement, please select a different location.'
     end
+  end
+
+  def overlapping_ships?(ship_coordinates)
+    ship_coordinates.all? {|coord| @cells[coord].empty?}
   end
 end
 

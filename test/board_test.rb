@@ -67,14 +67,32 @@ class BoardTest < Minitest::Test
   def test_consecutive_numbers?
     @board.create_uniq_numbers(['A1','A2','A3'])
     @board.create_uniq_letters(['A1','A2','A3'])
-    assert @board.valid_placement?(@cruiser, ['A1','A2','A3'])
-    refute @board.valid_placement?(@cruiser, ['A1','A2','A4'])
-    assert @board.valid_p
+    assert @board.consecutive_numbers?(@cruiser)
+    refute @board.consecutive_numbers?(@submarine)
+
+    @board.create_uniq_numbers(['A1','A3','A4'])
+    @board.create_uniq_letters(['A1','A3','A4'])
+    refute @board.consecutive_numbers?(@cruiser)
   end
 
   def test_consecutive_letters?
+    @board.create_uniq_numbers(['A1','B1','C1'])
+    @board.create_uniq_letters(['A1','B1','C1'])
+    assert @board.consecutive_letters?(@cruiser)
+    refute @board.consecutive_letters?(@submarine)
 
+    @board.create_uniq_numbers(['A1','B1','D1'])
+    @board.create_uniq_letters(['A1','B1','D1'])
+    refute @board.consecutive_letters?(@cruiser)
+  end
 
+  def test_valid_placement_contains_all_methods
+    assert @board.valid_placement?(@cruiser, ['A1','A2','A3'])
+    refute @board.valid_placement?(@cruiser, ['A1','A2','A4'])
+    assert @board.valid_placement?(@cruiser, ['B1','C1','D1'])
+    refute @board.valid_placement?(@cruiser, ['A1','C1','D1'])
+    refute @board.valid_placement?(@submarine, ['A1','A2','A3'])
+    refute @board.valid_placement?(@cruiser, ['A1','A2'])
   end
 
   def test_valid_placement_coordinates_are_not_diagonal
