@@ -16,7 +16,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_exists
-    assert_instance_of Board, @board
+    assert Board, @board
   end
 
   def test_board_is_a_hash
@@ -31,8 +31,8 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_16_cells_and_key_is_cell
-    assert_equal 16, @board.cells.count
-    assert_instance_of Cell, @board.cells['A1']
+    assert 16, @board.cells.count
+    assert Cell, @board.cells['A1']
   end
 
   def test_valid_coordinate?
@@ -102,9 +102,9 @@ class BoardTest < Minitest::Test
 
   def test_place_ship
     assert @board.place(@cruiser, ['A1', 'A2', 'A3'])
-    assert_equal @cruiser, @cell_1.ship
-    assert_equal @cruiser, @cell_2.ship
-    assert_equal @cruiser, @cell_3.ship
+    assert @cruiser, @cell_1.ship
+    assert @cruiser, @cell_2.ship
+    assert @cruiser, @cell_3.ship
     assert @cell_3.ship == @cell_2.ship
   end
 

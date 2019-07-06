@@ -1,6 +1,3 @@
-require './lib/coordinates'
-require './lib/cell'
-
 class Board
   attr_reader :coordinates, :cells
 
@@ -70,7 +67,7 @@ class Board
     if valid_placement?(ship, ship_coordinates)
       ship_coordinates.each {|coord| @cells[coord].place_ship(ship)}
     else
-      p 'Invalid ship placement, please select a different location.'
+      return false
     end
   end
 
@@ -78,6 +75,3 @@ class Board
     ship_coordinates.all? {|coord| @cells[coord].empty?}
   end
 end
-
-# && ship_coordinates.each {|coord| @cells[coord].empty?}
-# logic for the no test_no_overlapping_ships
