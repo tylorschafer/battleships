@@ -8,69 +8,74 @@ require 'pry'
 class CellTest < Minitest::Test
 
   def setup
-    @cell = Cell.new("B4")
-    @cruiser = Ship.new("Cruiser", 3)
-    @cell_1 = Cell.new("B4")
-    @cell_2 = Cell.new("C4")
+    @cell = Cell.new('B4')
+    @cruiser = Ship.new('Cruiser',3)
+    @cell_1 = Cell.new('B4')
+    @cell_2 = Cell.new('C4')
   end
 
   def test_cell_exsists
-    assert_instance_of Cell, @cell
+    assert Cell, @cell
   end
 
   def test_cell_returns_proper_coordinate
-    assert_equal "B4", @cell.coordinate
+    assert 'B4', @cell.coordinate
   end
 
   def test_cell_starts_with_no_ship
-    assert_equal nil, @cell.ship
+    assert_nil nil, @cell.ship
   end
 
   def test_cell_starts_empty
-    assert_equal true, @cell.empty?
+    assert @cell.empty?
   end
 
   def test_cell_can_add_ship
     @cell.place_ship(@cruiser)
-    assert_instance_of Ship, @cell.ship
+    assert Ship, @cell.ship
   end
 
   def test_cell_is_not_empty_with_ship_placed
     @cell.place_ship(@cruiser)
-    assert_equal false, @cell.empty?
+    refute @cell.empty?
   end
 
   def test_cell_knows_when_fired_upon
     @cell.place_ship(@cruiser)
-    assert_equal false, @cell.fired_upon?
+    refute @cell.fired_upon?
     @cell.fire_upon
-    assert_equal true, @cell.fired_upon?
+    assert @cell.fired_upon?
   end
 
   def test_ship_on_cell_takes_damage_when_fired_upon
     @cell.place_ship(@cruiser)
     @cell.fire_upon
-    assert_equal 2, @cruiser.health
+    assert 2, @cruiser.health
   end
 
   def test_cell_renders_properly
-    assert_equal ".", @cell_1.render
-    @cell_1.fire_upon
-    assert_equal "M", @cell_1.render
-    @cell_2.place_ship(@cruiser)
-    assert_equal ".", @cell_2.render
-    assert_equal "S", @cell_2.render(true)
+    assert '.', @cell.render
+    @cell.fire_upon
+    assert 'M', @cell.render
+    @cell.place_ship(@cruiser)
+    @cell.fire_upon
+    assert 'H', @cell.render
+    assert 'S', @cell.render(true)
+    @cell.fire_upon
+    @cell.fire_upon
+    assert 'X', @cell.render
   end
 
-  def test_cell_renders_when_ship_hit
-    skip
+  def test_cell_renders_when_ship_hit_or_sunk
     @cell_2.place_ship(@cruiser)
     @cell_2.fire_upon
-    assert_equal "H", @cell_2.render
-    assert_equal false, @cruiser.sunk?
+    assert 'H', @cell_2.render
+    refute @cruiser.sunk?
     @cruiser.hit
     @cruiser.hit
-    assert_equal true, @cruiser.sunk?
-    assert_equal "X", @cell_2.render
+    assert true, @cruiser.sunk?
+    assert 'X', @cell_2.render
+    assert 'S', @cell_2.render
+    assert '.', @cell_1.render
   end
 end

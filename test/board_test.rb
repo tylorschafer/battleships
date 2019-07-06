@@ -96,12 +96,12 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_coordinates_are_not_diagonal
-    refute @board.valid_placement?(@cruiser, ['A3', 'B2', 'C1'])
-    refute @board.valid_placement?(@submarine, ['C2', 'D3'])
+    refute @board.valid_placement?(@cruiser, ['A3','B2','C1'])
+    refute @board.valid_placement?(@submarine, ['C2','D3'])
   end
 
   def test_place_ship
-    assert @board.place(@cruiser, ['A1', 'A2', 'A3'])
+    assert @board.place(@cruiser, ['A1','A2','A3'])
     assert @cruiser, @cell_1.ship
     assert @cruiser, @cell_2.ship
     assert @cruiser, @cell_3.ship
@@ -109,11 +109,11 @@ class BoardTest < Minitest::Test
   end
 
   def test_no_overlapping_ships
-    @board.place(@cruiser, ['A1', 'A2', 'A3'])
+    @board.place(@cruiser, ['A1','A2','A3'])
     refute  @board.overlapping_ships?(['A1','A2'])
-    assert  @board.overlapping_ships?(['B1', 'B2'])
-    refute  @board.valid_placement?(@submarine, ['A1', 'B1'])
-    assert  @board.valid_placement?(@submarine, ['D1', 'D2'])
+    assert  @board.overlapping_ships?(['B1','B2'])
+    refute  @board.valid_placement?(@submarine, ['A1','B1'])
+    assert  @board.valid_placement?(@submarine, ['D1','D2'])
   end
 
 end

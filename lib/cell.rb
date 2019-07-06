@@ -24,8 +24,10 @@ class Cell
   end
 
   def fire_upon
+    if @cell_contents.empty? == false
+      @ship.hit
+    end
     @fired_upon = true
-    @ship.hit
   end
 
   def fired_upon?
@@ -33,15 +35,16 @@ class Cell
   end
 
   def render(show = false)
-    if @fired_upon == true && @cell_contents.empty? == false
-      "H"
-    elsif @fired_upon == true && @ship.sunk? == true
-      "X"
-    elsif @fired_upon == true && @cell_contents.empty == true
-      "M"
-    elsif show == true
+    if show == true
       "S"
+    elsif @fired_upon == false && @cell_contents.empty? == true
+      "."
+    elsif @fired_upon == true && @cell_contents.empty? == true
+      "M"
+    elsif @cell_contents.empty? == false && @ship.sunk? == true
+      "X"
+    elsif @fired_upon == true && @cell_contents.empty? == false
+      "H"
     end
   end
-
 end
