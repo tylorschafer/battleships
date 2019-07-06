@@ -31,7 +31,8 @@ def computer_cruiser_placement
   start_point = @computer_board.coordinates[rand(@computer_board.coordinates.count)]
   start_point_array = start_point.chars
   cruiser_location = [start_point]
-  if rand(1...2) == 1
+  starting_letter_ordinal = (start_point_array[0].ord - 64)
+  if rand(1..2) == 1
     if start_point_array[1].to_i >= @computer_cruiser.length
       cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i - 1).to_s)
       cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i - 2).to_s)
@@ -39,7 +40,14 @@ def computer_cruiser_placement
       cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i + 1).to_s)
       cruiser_location.push(start_point_array[0] + (start_point_array[1].to_i + 2).to_s)
     end
-  else rand(1...2) == 2
-    
+  else rand(1..2) == 2
+    if starting_letter_ordinal >= @computer_cruiser.length
+      cruiser_location.push((starting_letter_ordinal - 1 + 64).chr.to_s + start_point_array[1])
+      cruiser_location.push((starting_letter_ordinal - 2 + 64).chr.to_s + start_point_array[1])
+    else starting_letter_ordinal < @computer_cruiser.length
+      cruiser_location.push((starting_letter_ordinal + 1 + 64).chr.to_s + start_point_array[1])
+      cruiser_location.push((starting_letter_ordinal + 2 + 64).chr.to_s + start_point_array[1])
+    end
   end
+  cruiser_location.sort
 end
