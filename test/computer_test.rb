@@ -9,9 +9,9 @@ require './lib/computer'
 class ComputerTest < Minitest::Test
   def setup
     @computer = Computer.new
-    @computer_board = Board.new
-    @computer_cruiser = Ship.new('Cruiser', 3)
-    @computer_submarine = Ship.new('Submarine', 2)
+    @board = Board.new
+    @cruiser = Ship.new('Cruiser', 3)
+    @submarine = Ship.new('Submarine', 2)
   end
 
   def test_computer_exists
@@ -19,9 +19,9 @@ class ComputerTest < Minitest::Test
   end
 
   def test_computer_has_board_and_ships
-    assert_instance_of Board, @computer_board
-    assert_instance_of Ship, @computer_cruiser
-    assert_instance_of Ship, @computer_submarine
+    assert_instance_of Board, @board
+    assert_instance_of Ship, @cruiser
+    assert_instance_of Ship, @submarine
   end
 
   def test_computer_ship_placement
