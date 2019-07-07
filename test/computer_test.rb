@@ -23,8 +23,9 @@ class ComputerTest < Minitest::Test
     assert_instance_of Ship, @computer_cruiser
     assert_instance_of Ship, @computer_submarine
   end
-### ASK ABOUT THIS TEST BELOW - WHAT TO TEST BECAUSE IT'S RANDOM
-  def test_random_computer_cruiser_placement
-    assert_equal 3, @computer.computer_cruiser_placement.count
+
+  def test_computer_ship_placement
+    assert @computer.submarine_placement
+    assert @computer.cruiser_placement
   end
 end
