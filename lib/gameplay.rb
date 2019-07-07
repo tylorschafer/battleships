@@ -25,9 +25,10 @@ def play_game
   user = User.new
   puts 'I have laid out my ships on the grid.'
   puts 'You now need to lay out your two ships on the grid.'
-  puts 'The Criser is two units long and the Submarine is three units long.'
+  puts 'The Criser is three units long and the Submarine is two units long.'
   user.board.render
-  # user.cruiser_placement
+  user.cruiser_placement
+  user.submarine_placement
 end
 
 start_game

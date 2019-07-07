@@ -96,6 +96,7 @@ class Board
       end
     end
     formatted_board = "   #{uniq_number_cells.join(" ")} \n #{rendered_board.join(" ")}"
-    p formatted_board
+    puts formatted_board
+    formatted_board
   end
 end
