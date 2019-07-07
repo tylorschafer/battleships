@@ -93,6 +93,6 @@ class Board
         "#{value.render}"
       end
     end
-    "  #{uniq_number_cells.join(" ")} \n #{@rendered_board.join(" ")}"
+    puts "  #{uniq_number_cells.join(" ")} \n #{@rendered_board.join(" ")}"
   end
 end
