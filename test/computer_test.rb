@@ -5,6 +5,7 @@ require './lib/ship'
 require './lib/cell'
 require './lib/coordinates'
 require './lib/computer'
+require 'pry'
 
 class ComputerTest < Minitest::Test
   def setup
