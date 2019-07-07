@@ -15,7 +15,7 @@ class User
     selection_array = selection.split(" ")
     if @board.valid_placement?(@cruiser, selection_array)
       @board.place(@cruiser, selection_array)
-      @board.render
+      @board.render(true)
       return true
     else
       puts "Those are invalid coordinates. Please try again:"
