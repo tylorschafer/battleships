@@ -26,7 +26,7 @@ class UserTest < Minitest::Test
   end
 
   def test_user_ship_placement
-    assert_true @user.cruiser_placement
-    assert_true @user.submarine_placement
+    assert @user.cruiser_placement
+    assert @user.submarine_placement
   end
 end

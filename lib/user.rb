@@ -9,6 +9,7 @@ class User
   end
 
   def cruiser_placement
+    @board.render(true)
     valid_input = false
     until valid_input == true do
       puts 'Enter the squares for the Cruiser (3 spaces):'
@@ -26,6 +27,7 @@ class User
   end
 
   def submarine_placement
+    @board.render(true)
     valid_input = false
     until valid_input == true do
       puts 'Enter the squares for the Submarine (2 spaces):'
