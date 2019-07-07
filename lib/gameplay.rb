@@ -17,8 +17,7 @@ def start_game
 end
 
 def play_game
-  @user_board = Board.new
-  @user_board.create_cells
-  @user_cruiser = Ship.new('Cruiser', 3)
-  @user_submarine = Ship.new('Submarine', 2)
+  computer = Computer.new
+  computer.cruiser_placement
+  computer.submarine_placement
 end
