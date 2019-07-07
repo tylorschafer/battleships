@@ -74,4 +74,25 @@ class Board
   def overlapping_ships?(ship_coordinates)
     ship_coordinates.all? {|coord| @cells[coord].empty?}
   end
+
+  def render(show = false)
+    uniq_number_cells = @cells.collect {|key,value| key.chars[1].to_i}.uniq
+    uniq_letter_cells = @cells.collect {|key, value| key.chars[0]}.uniq
+    num = 0
+    @rendered_board = @cells.collect do |key,value|
+      if key.chars[1].to_i == uniq_number_cells.count
+        num += 1
+        "#{value.render} \n"
+      elsif key.chars[1].to_i == 1 && value.empty? == true
+        "#{uniq_letter_cells[num]} #{value.render}"
+      elsif key.chars[1].to_i == 1 && value.empty? == false
+        "#{uniq_letter_cells[num]} #{value.render(true)}"
+      elsif show == true && value.empty? == false
+        "#{value.render(true)}"
+      else
+        "#{value.render}"
+      end
+    end
+    "  #{uniq_number_cells.join(" ")} \n #{@rendered_board.join(" ")}"
+  end
 end

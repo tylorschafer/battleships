@@ -4,6 +4,7 @@ require './lib/board'
 require './lib/ship'
 require './lib/cell'
 require './lib/coordinates'
+require 'pry'
 
 class BoardTest < Minitest::Test
   def setup
@@ -13,6 +14,19 @@ class BoardTest < Minitest::Test
     @cell_1 = @board.cells['A1']
     @cell_2 = @board.cells['A2']
     @cell_3 = @board.cells['A3']
+    @cell_4 = @board.cells['A4']
+    @cell_5 = @board.cells['B1']
+    @cell_6 = @board.cells['B2']
+    @cell_7 = @board.cells['B3']
+    @cell_8 = @board.cells['B4']
+    @cell_9 = @board.cells['C1']
+    @cell_10 = @board.cells['C2']
+    @cell_11 = @board.cells['C3']
+    @cell_12 = @board.cells['C4']
+    @cell_13 = @board.cells['D1']
+    @cell_14 = @board.cells['D2']
+    @cell_15 = @board.cells['D3']
+    @cell_16 = @board.cells['D4']
   end
 
   def test_board_exists
@@ -116,4 +130,22 @@ class BoardTest < Minitest::Test
     assert  @board.valid_placement?(@submarine, ['D1','D2'])
   end
 
+  def test_board_render
+    assert "  1 2 3 4 \n A . . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
+    @board.place(@cruiser, ['A1','A2','A3'])
+    assert "  1 2 3 4 \n A S S S . \n B . . . . \n C . . . . \n D . . . . \n", @board.render(true)
+    @cell_1.fire_upon
+    assert "  1 2 3 4 \n A H S S . \n B . . . . \n C . . . . \n D . . . . \n", @board.render(true)
+    @cell_4.fire_upon
+    @cell_16.fire_upon
+    assert "  1 2 3 4 \n A H S S M \n B . . . . \n C . . . . \n D . . . M \n", @board.render(true)
+    @board.place(@submarine, ['C1','D1'])
+    assert "  1 2 3 4 \n A H S S M \n B . . . . \n C S . . . \n D S . . M \n", @board.render(true)
+    @cell_9.fire_upon
+    assert "  1 2 3 4 \n A H S S M \n B . . . . \n C H . . . \n D S . . M \n", @board.render(true)
+    @cell_12.fire_upon
+    @cell_13.fire_upon
+    @cell_14.fire_upon
+    assert "  1 2 3 4 \n A H S S M \n B . . . . \n C H . . M \n D H M . M \n", @board.render(true)
+  end
 end
