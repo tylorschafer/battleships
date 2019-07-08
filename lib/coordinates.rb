@@ -1,6 +1,6 @@
 
 class Coordinates
-  attr_reader :x, :y, :x_array, :y_array
+  attr_reader :x, :y
 
   def initialize(x = 4, y = 4)
     @x = x
