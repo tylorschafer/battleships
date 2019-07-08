@@ -40,7 +40,7 @@ class Board
       return false
     end
     @uniq_numbers.each_cons(2).all? do |first, second|
-      second.to_i - first.to_i == 1 || -1
+      second.to_i - first.to_i == 1 || second.to_i - first.to_i == -1
     end
   end
 
@@ -49,7 +49,7 @@ class Board
       return false
     end
     @uniq_letters.each_cons(2).all? do |first, second|
-      second - first == 1 || -1
+      second - first == 1 || second - first == -1
     end
   end
 
@@ -100,5 +100,6 @@ class Board
     end
     formatted_board = "   #{uniq_number_cells.join(" ")} \n #{rendered_board.join(" ")}"
     puts formatted_board
+    formatted_board
   end
 end

@@ -12,7 +12,7 @@ class ShipTest < Minitest::Test
   end
 
   def test_attributes
-    assert 'Cruiser', @cruiser.nameå
+    assert 'Cruiser', @cruiser.name
     assert 3, @cruiser.length
     assert 3, @cruiser.health
   end
@@ -34,6 +34,6 @@ class ShipTest < Minitest::Test
     3.times do
       @cruiser.hit
     end
-    assert @ship.sunk?
+    assert @cruiser.sunk?
   end
 end

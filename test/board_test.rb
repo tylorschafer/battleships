@@ -133,6 +133,5 @@ class BoardTest < Minitest::Test
     @board.place(@submarine, ['C1','D1'])
     assert_equal "   1 2 3 4 \n A H . . M \n B . . . . \n C . . . . \n D . . . M \n", @board.render
     assert_equal "   1 2 3 4 \n A H S S M \n B . . . . \n C S . . . \n D S . . M \n", @board.render(true)
-    binding.pry
   end
 end
