@@ -42,7 +42,6 @@ class Computer
         @board.place(@cruiser, cruiser_location)
         valid_choice = true
       else
-        puts 'Cruiser placement invalid'
         next
       end
     end
@@ -74,7 +73,6 @@ class Computer
         @board.place(@submarine, submarine_location)
         valid_choice = true
       else
-        puts 'Submarine placement invalid'
         next
       end
     end
