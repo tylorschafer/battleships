@@ -51,7 +51,7 @@ class Computer
 
   def submarine_placement
     valid_choice = false
-    until valid_choice = true
+    until valid_choice == true
       start_point = @board.coordinates[rand(@board.coordinates.count)]
       start_point_array = start_point.chars
       submarine_location = [start_point]
