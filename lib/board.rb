@@ -1,8 +1,10 @@
 class Board
   attr_reader :coordinates, :cells
 
-  def initialize
-    @coordinates = Coordinates.new.run
+  def initialize(length = 9, width = 9)
+    @length = length
+    @width = width
+    @coordinates = Coordinates.new(length, width).run
     @cells = create_cells
   end
 
