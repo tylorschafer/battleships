@@ -23,8 +23,8 @@ end
 
 def play_game
   @computer = Computer.new
-  @computer.cruiser_placement
-  @computer.submarine_placement
+  @computer.ship_placement(@computer.cruiser)
+  @computer.ship_placement(@computer.submarine)
   @user = User.new
   puts 'I have laid out my ships on the grid.'
   puts 'You now need to lay out your two ships on the grid.'
