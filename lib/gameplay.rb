@@ -32,6 +32,7 @@ def play_game
   @user.cruiser_placement
   @user.submarine_placement
   turn = Turn.new(@computer, @user)
+  turn.display_both_boards
   until @computer.cruiser.sunk? && @computer.submarine.sunk? || @user.cruiser.sunk? && @user.submarine.sunk? do
     turn.take
   end
@@ -39,7 +40,7 @@ def play_game
     puts 'You won!'
   elsif @user.cruiser.sunk? && @user.submarine.sunk?
     puts 'I won!'
-  end 
+  end
 end
 
 start_game
