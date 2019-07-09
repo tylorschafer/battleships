@@ -16,6 +16,7 @@ def start_game
     play_game
   else
     puts 'Invalid input'
+    start_game
   end
 
 end
@@ -41,6 +42,7 @@ def play_game
   elsif @user.cruiser.sunk? && @user.submarine.sunk?
     puts 'I won!'
   end
+  start_game
 end
 
 start_game

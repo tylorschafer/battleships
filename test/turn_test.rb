@@ -5,17 +5,14 @@ require './lib/board'
 require './lib/computer'
 require './lib/user'
 require './lib/cell'
-require 'pry'
 
 class TurnTest < Minitest::Test
   def setup
-    @turn = Turn.new
     @computer = Computer.new
     @user = User.new
     @user.board.create_cells
-    @computer.cruiser_placement
-    @computer.submarine_placement
     @computer.board.create_cells
+    @turn = Turn.new(@computer, @user)
   end
   def test_turn_exists
     assert_instance_of Turn, @turn
