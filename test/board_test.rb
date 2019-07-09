@@ -58,6 +58,7 @@ class BoardTest < Minitest::Test
   def test_create_uniq_numbers
     assert ['2','2','2'] != @board.create_uniq_numbers(['A2','B2','C2'])
     assert ['1','2','3'], @board.create_uniq_numbers(['A1','A2','A3'])
+    assert_equal ['8','9','10'], @board.create_uniq_numbers(['A8','A9','A10'])
     assert ['1'], @board.create_uniq_numbers(['A1','B1','C1'])
     assert ['4'], @board.create_uniq_numbers(['B4','C4','D4'])
   end
@@ -74,10 +75,12 @@ class BoardTest < Minitest::Test
     @board.create_uniq_letters(['A1','A2','A3'])
     assert @board.consecutive_numbers?(@cruiser)
     refute @board.consecutive_numbers?(@submarine)
-
     @board.create_uniq_numbers(['A1','A3','A4'])
     @board.create_uniq_letters(['A1','A3','A4'])
     refute @board.consecutive_numbers?(@cruiser)
+    @board.create_uniq_numbers(['A8','A9','A10'])
+    @board.create_uniq_letters(['A8','A9','A10'])
+    # assert @board.consecutive_numbers?(@cruiser)
   end
 
   def test_consecutive_letters?

@@ -1,7 +1,7 @@
 class Board
   attr_reader :coordinates, :cells
 
-  def initialize(length = 4, width = 4)
+  def initialize(length = 10, width = 10)
     @length = length
     @width = width
     @coordinates = Coordinates.new(length, width).run
@@ -25,16 +25,14 @@ class Board
   end
 
   def create_uniq_numbers(ship_coordinates)
-    split_chars_array = ship_coordinates.map{ |element|element.chars}
-    numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
+    numbers_array = ship_coordinates.map{ |element|element.gsub(/\D/, '')}
     @uniq_numbers = numbers_array.flatten.uniq
   end
 
   def create_uniq_letters(ship_coordinates)
-    split_chars_array = ship_coordinates.map{ |element|element.chars}
-    letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0}
-    uniq_letters = letter_array.flatten.uniq
-    @uniq_letters = uniq_letters.map {|letter| letter.ord - 64}
+    letters_array = ship_coordinates.map{ |element|element.gsub(/\W/, '')}
+    ord_letters = letters_array.map {|letter| letter.ord - 64}
+    @uniq_letters = ord_letters.flatten.uniq
   end
 
   def consecutive_numbers?(ship)
