@@ -44,6 +44,8 @@ class BoardTest < Minitest::Test
     refute @board.valid_coordinate?('A5')
     refute @board.valid_coordinate?('E1')
     refute @board.valid_coordinate?('A22')
+    assert @board.valid_coordinate?('A1','A2')
+    refute @board.valid_coordinate?('A3','A4','A5')
   end
 
   def test_coordinate_count_equal_to_length?

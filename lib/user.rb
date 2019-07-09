@@ -1,5 +1,7 @@
+require 'pry'
+
 class User
-  attr_reader :board, :cruiser, :submarine
+  attr_reader :board, :cruiser, :submarine, :coordinates
 
   def initialize
     @board = Board.new

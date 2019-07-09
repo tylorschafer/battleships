@@ -14,8 +14,8 @@ class Board
     new_board
   end
 
-  def valid_coordinate?(coord)
-    @coordinates.include?(coord)
+  def valid_coordinate?(*coordinates)
+    coordinates.all? {|single_coord| @coordinates.include?(single_coord)}
   end
 
   def coordinate_count_equal_to_length?(ship, ship_coordinates = [])
@@ -54,13 +54,9 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
-    create_uniq_letters(ship_coordinates)
-    create_uniq_numbers(ship_coordinates)
-    if coordinate_count_equal_to_length?(ship, ship_coordinates) && overlapping_ships?(ship_coordinates) && (consecutive_letters?(ship) || consecutive_numbers?(ship))
-      return true
-    else
-      false
-    end
+      create_uniq_letters(ship_coordinates)
+      create_uniq_numbers(ship_coordinates)
+      return coordinate_count_equal_to_length?(ship, ship_coordinates) && overlapping_ships?(ship_coordinates) && (consecutive_letters?(ship) || consecutive_numbers?(ship))
   end
 
   def place(ship, ship_coordinates)
@@ -72,7 +68,9 @@ class Board
   end
 
   def overlapping_ships?(ship_coordinates)
-    ship_coordinates.all? {|coord| @cells[coord].empty?}
+    if ship_coordinates.all? {|single_coord| @coordinates.include?(single_coord)} == true
+      ship_coordinates.all? {|coord| @cells[coord].empty?}
+    end
   end
 
   def render(show = false)
