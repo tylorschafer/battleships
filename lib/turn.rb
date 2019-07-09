@@ -39,6 +39,8 @@ class Turn
       if @computer.board.valid_coordinate?(@fire_selection) && @computer.board.cells[@fire_selection].fired_upon? == false
         @computer.board.cells[@fire_selection].fire_upon
         valid_selection = true
+      elsif @computer.board.valid_coordinate?(@fire_selection) == false
+        puts 'Your selection is invalid. Please choose a coordinate within the board:'
       else
         puts 'You have already fired upon this location. Please select another:'
         next
@@ -72,9 +74,21 @@ class Turn
     puts "My shot on #{@computer_selection} was a #{computer_shot_result}."
   end
 
+  def check_for_winner
+    if @computer.cruiser.sunk? && @computer.submarine.sunk?
+      puts 'You won!'
+    else
+      computer_fires_shot
+      if @user.cruiser.sunk? && @user.submarine.sunk?
+        puts 'I won!'
+      else
+        display_both_boards
+      end 
+    end
+  end
+
   def take
     user_fires_shot
-    computer_fires_shot
-    display_both_boards
+    check_for_winner
   end
 end
