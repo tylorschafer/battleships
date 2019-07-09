@@ -122,19 +122,18 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_render
-    binding.pry
     assert_equal "   1 2 3 4 \n A . . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
-    # @board.place(@cruiser, ['A1','A2','A3'])
-    # assert_equal "   1 2 3 4 \n A . . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
-    # assert_equal "   1 2 3 4 \n A S S S . \n B . . . . \n C . . . . \n D . . . . \n", @board.render(true)
-    # @cell_1.fire_upon
-    # assert_equal "   1 2 3 4 \n A H . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
-    # assert_equal "   1 2 3 4 \n A H S S . \n B . . . . \n C . . . . \n D . . . . \n", @board.render(true)
-    # @cell_4.fire_upon
-    # @cell_16.fire_upon
-    # assert_equal "   1 2 3 4 \n A H S S M \n B . . . . \n C . . . . \n D . . . M \n", @board.render(true)
-    # @board.place(@submarine, ['C1','D1'])
-    # assert_equal "   1 2 3 4 \n A H . . M \n B . . . . \n C . . . . \n D . . . M \n", @board.render
-    # assert_equal "   1 2 3 4 \n A H S S M \n B . . . . \n C S . . . \n D S . . M \n", @board.render(true)
+    @board.place(@cruiser, ['A1','A2','A3'])
+    assert_equal "   1 2 3 4 \n A . . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
+    assert_equal "   1 2 3 4 \n A S S S . \n B . . . . \n C . . . . \n D . . . . \n", @board.render(true)
+    @cell_1.fire_upon
+    assert_equal "   1 2 3 4 \n A H . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
+    assert_equal "   1 2 3 4 \n A H S S . \n B . . . . \n C . . . . \n D . . . . \n", @board.render(true)
+    @cell_4.fire_upon
+    @cell_16.fire_upon
+    assert_equal "   1 2 3 4 \n A H S S M \n B . . . . \n C . . . . \n D . . . M \n", @board.render(true)
+    @board.place(@submarine, ['C1','D1'])
+    assert_equal "   1 2 3 4 \n A H . . M \n B . . . . \n C . . . . \n D . . . M \n", @board.render
+    assert_equal "   1 2 3 4 \n A H S S M \n B . . . . \n C S . . . \n D S . . M \n", @board.render(true)
   end
 end
