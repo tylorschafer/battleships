@@ -22,10 +22,33 @@ def start_game
 end
 
 def play_game
-  @computer = Computer.new
+  puts 'Lets choose what size board you would like to play on.'
+  valid_length = false
+  until valid_length == true
+    puts 'Please enter the length for your board. (Maximum size 26)'
+    user_length = gets.chomp.to_i
+      if user_length > 26
+        puts 'I am sorry that is too big of a board.'
+      elsif user_length <= 26
+        valid_length == true
+        break
+      end
+    end
+  valid_width = false
+  until valid_width == true
+    puts 'Now please enter a width for your board. (Maximum size 10)'
+    user_width = gets.chomp.to_i
+      if user_width > 10
+        puts 'I am sorry that is too big of a board.'
+      elsif user_width <= 10
+        valid_width = true
+        break
+      end
+    end
+  @computer = Computer.new(user_length, user_width)
   @computer.ship_placement(@computer.cruiser)
   @computer.ship_placement(@computer.submarine)
-  @user = User.new
+  @user = User.new(user_length, user_width)
   puts 'I have laid out my ships on the grid.'
   puts 'You now need to lay out your two ships on the grid.'
   puts 'The Criser is three units long and the Submarine is two units long.'
