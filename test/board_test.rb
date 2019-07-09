@@ -122,6 +122,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_render
+    binding.pry
     assert_equal "   1 2 3 4 \n A . . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
     @board.place(@cruiser, ['A1','A2','A3'])
     assert_equal "   1 2 3 4 \n A . . . . \n B . . . . \n C . . . . \n D . . . . \n", @board.render
