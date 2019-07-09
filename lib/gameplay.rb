@@ -32,8 +32,15 @@ def play_game
   @user.cruiser_placement
   @user.submarine_placement
   turn = Turn.new(@computer, @user)
-  # IF LOOP UNTIL ONE USER HAS BOTH SHIPS SUNK
-  turn.take
+  turn.display_both_boards
+  until @computer.cruiser.sunk? && @computer.submarine.sunk? || @user.cruiser.sunk? && @user.submarine.sunk? do
+    turn.take
+  end
+  if @computer.cruiser.sunk? && @computer.submarine.sunk?
+    puts 'You won!'
+  elsif @user.cruiser.sunk? && @user.submarine.sunk?
+    puts 'I won!'
+  end
 end
 
 start_game
