@@ -1,7 +1,7 @@
 class Board
   attr_reader :coordinates, :cells
 
-  def initialize(length = 9, width = 9)
+  def initialize(length = 4, width = 4)
     @length = length
     @width = width
     @coordinates = Coordinates.new(length, width).run
@@ -76,7 +76,7 @@ class Board
   end
 
   def render(show = false)
-    uniq_number_cells = @cells.collect {|key,value| key.chars[1].to_i}.uniq
+    uniq_number_cells = @cells.collect {|key,value| key.gsub(/\D/, '').to_i}.uniq.sort
     @grouped_cells = @cells.group_by {|cell| cell[0][0]}
     if show == true
       @formatted_board = @grouped_cells.map do |key,value|
