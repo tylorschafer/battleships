@@ -111,19 +111,20 @@ end
   def check_for_winner
     if @computer.cruiser.sunk? && @computer.submarine.sunk?
       puts 'You won!'
+      display_both_boards
     else
-      computer_fires_shot
+      computer_smart_firing
       if @user.cruiser.sunk? && @user.submarine.sunk?
         puts 'I won!'
+        display_both_boards
       else
         display_both_boards
-      end 
+      end
     end
   end
 
   def take
     user_fires_shot
-    computer_smart_firing
-    display_both_boards
+    check_for_winner
   end
 end
