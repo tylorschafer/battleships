@@ -5,9 +5,9 @@ require './lib/ship'
 require './lib/cell'
 require './lib/coordinates'
 require './lib/computer'
-require 'pry'
 
 class ComputerTest < Minitest::Test
+
   def setup
     @computer = Computer.new(4,4)
     @board = Board.new
@@ -26,7 +26,7 @@ class ComputerTest < Minitest::Test
   end
 
   def test_computer_ship_placement
-    assert @computer.submarine_placement
-    assert @computer.cruiser_placement
+    assert @computer.ship_placement(@cruiser)
+    assert @computer.ship_placement(@submarine)
   end
 end

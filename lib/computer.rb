@@ -1,11 +1,3 @@
-require './lib/ship'
-require './lib/board'
-require './lib/coordinates'
-require './lib/cell'
-require './lib/turn'
-require './lib/user'
-
-
 class Computer
   attr_reader :board, :cruiser, :submarine, :turn_collection
 
