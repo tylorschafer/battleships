@@ -5,7 +5,6 @@ require './lib/ship'
 require './lib/cell'
 require './lib/coordinates'
 require './lib/user'
-require 'pry'
 
 class UserTest < Minitest::Test
   def setup

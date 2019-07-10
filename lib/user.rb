@@ -1,9 +1,7 @@
-require 'pry'
-
 class User
   attr_reader :board, :cruiser, :submarine, :coordinates
 
-  def initialize(length, width)
+  def initialize(length = 4, width = 4)
     @board = Board.new(length, width)
     @board.create_cells
     @cruiser = Ship.new('Cruiser', 3)
