@@ -9,7 +9,7 @@ require 'pry'
 
 class ComputerTest < Minitest::Test
   def setup
-    @computer = Computer.new
+    @computer = Computer.new(4,4)
     @board = Board.new
     @cruiser = Ship.new('Cruiser', 3)
     @submarine = Ship.new('Submarine', 2)

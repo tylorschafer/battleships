@@ -8,8 +8,8 @@ require './lib/cell'
 
 class TurnTest < Minitest::Test
   def setup
-    @computer = Computer.new
-    @user = User.new
+    @computer = Computer.new(4,4)
+    @user = User.new(4,4)
     @user.board.create_cells
     @computer.board.create_cells
     @turn = Turn.new(@computer, @user)
@@ -31,6 +31,8 @@ class TurnTest < Minitest::Test
   end
 
   def test_computer_fires_shot
+    binding.pry
+    @coordinate_collection = ['A1','B1']
     hit_cell = @user.board.cells['B2']
     hit_cell.fire_upon
 

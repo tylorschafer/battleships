@@ -4,11 +4,17 @@ require './lib/user'
 require './lib/cell'
 require './lib/coordinates'
 require './lib/ship'
+require 'pry'
 
 class Turn
+
+  attr_reader :turn_collection, :coordinate_collection
+
   def initialize(computer, user)
     @computer = computer
     @user = user
+    @turn_collection = ['xxx']
+    @coordinate_collection = []
   end
 
   def display_both_boards
@@ -20,16 +26,16 @@ class Turn
 
   def user_shot_result
     case
-    when @computer.board.cells[@fire_selection].empty? == true
-      'miss'
-    when  @computer.board.cells[@fire_selection].cell_contents[0].name == 'Submarine' && @computer.submarine.sunk?
-      'hit and sunk my Submarine'
-    when @computer.board.cells[@fire_selection].cell_contents[0].name == 'Cruiser' && @computer.cruiser.sunk?
-      'hit and sunk my Cruiser'
-    when @computer.board.cells[@fire_selection].empty? == false
-      'hit'
+      when @computer.board.cells[@fire_selection].empty? == true
+        'miss'
+      when  @computer.board.cells[@fire_selection].cell_contents[0].name == 'Submarine' && @computer.submarine.sunk?
+        'hit and sunk my Submarine'
+      when @computer.board.cells[@fire_selection].cell_contents[0].name == 'Cruiser' && @computer.cruiser.sunk?
+        'hit and sunk my Cruiser'
+      when @computer.board.cells[@fire_selection].empty? == false
+        'hit'
+      end
     end
-  end
 
   def user_fires_shot
     puts 'Enter the coordinate for your shot:'
@@ -50,31 +56,54 @@ class Turn
   def computer_shot_result
     case
     when @user.board.cells[@computer_selection].empty? == true
+      @turn_collection << 'miss'
       'miss'
     when @user.board.cells[@computer_selection].cell_contents[0].name == 'Cruiser' && @user.cruiser.sunk?
+      @turn_collection << 'hit and sunk your Cruiser'
       'hit and sunk your Cruiser'
     when @user.board.cells[@computer_selection].cell_contents[0].name == 'submarine' && @user.submarine.sunk?
+      @turn_collection << 'hit and sunk your Submarine'
       'hit and sunk your Submarine'
     when @user.board.cells[@computer_selection].empty? == false
+      @turn_collection << 'hit'
       'hit'
     end
   end
 
-  def computer_fires_shot
-    valid_selection = false
-    until valid_selection == true
-      @computer_selection = @user.board.coordinates.sample
-      if @user.board.cells[@computer_selection].fired_upon? == false
-        @user.board.cells[@computer_selection].fire_upon
-        valid_selection = true
+    def computer_smart_firing
+      valid_choice = false
+      until valid_choice == true
+        if @turn_collection.last.include?('hit') == true && @turn_collection.last.include?('sunk') == false
+            @computer_selection = @user.board.coordinates.min_by do |coor|
+              (coor.ord <=> @coordinate_collection.last.ord)
+            end
+          if @user.board.cells[@computer_selection].fired_upon? == false
+            @user.board.cells[@computer_selection].fire_upon
+            valid_choice = true
+            @coordinate_collection << @computer_selection
+          else
+            @computer_selection = @user.board.coordinates.sample
+            if @user.board.cells[@computer_selection].fired_upon? == false
+              @user.board.cells[@computer_selection].fire_upon
+              valid_choice = true
+              @coordinate_collection << @computer_selection
+            end
+          end
+        else
+          @computer_selection = @user.board.coordinates.sample
+          if @user.board.cells[@computer_selection].fired_upon? == false
+            @user.board.cells[@computer_selection].fire_upon
+            valid_choice = true
+            @coordinate_collection << @computer_selection
+          end
+        end
       end
+      puts "My shot on #{@computer_selection} was a #{computer_shot_result}."
     end
-    puts "My shot on #{@computer_selection} was a #{computer_shot_result}."
-  end
 
   def take
     user_fires_shot
-    computer_fires_shot
+    computer_smart_firing
     display_both_boards
   end
 end
