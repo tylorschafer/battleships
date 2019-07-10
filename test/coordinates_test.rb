@@ -2,8 +2,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/coordinates'
 
-
-
 class CoordinatesTest < Minitest::Test
 
   def setup

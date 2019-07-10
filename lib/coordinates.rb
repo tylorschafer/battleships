@@ -1,4 +1,3 @@
-
 class Coordinates
   attr_reader :x, :y, :x_array, :y_array
 
