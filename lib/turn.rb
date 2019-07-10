@@ -4,6 +4,7 @@ require './lib/user'
 require './lib/cell'
 require './lib/coordinates'
 require './lib/ship'
+require './lib/battle_summary'
 require 'pry'
 
 class Turn
@@ -16,12 +17,13 @@ class Turn
     @turn_collection = ['xxx']
     @coordinate_collection = []
     @user_cells = @user.board.cells
+    @battle = BattleSummary.new(@computer,@user)
   end
 
   def display_both_boards
-    puts '=============COMPUTER BOARD============='
+    @battle.computer_summary
     @computer.board.render
-    puts '==============PLAYER BOARD=============='
+    @battle.user_summary
     @user.board.render(true)
   end
 
