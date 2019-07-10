@@ -17,6 +17,11 @@ class CoordinatesTest < Minitest::Test
     assert Coordinates, @coordinates
   end
 
+  def test_default_attributes
+    assert_equal 4, @coordinates.x
+    assert_equal 4, @coordinates.y
+  end
+
   def test_x_value_to_letter
     assert 'ABCD', @coordinates.to_letter
   end
@@ -44,7 +49,7 @@ class CoordinatesTest < Minitest::Test
     assert 'D4', @coordinates.add_x_and_y.last
   end
 
-  def test_coords
+  def test_default_coords
     assert ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4'], @coordinates.add_x_and_y
   end
 end
