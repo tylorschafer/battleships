@@ -5,7 +5,7 @@ require './lib/cell'
 require './lib/coordinates'
 require './lib/ship'
 require './lib/battle_summary'
-require 'pry'
+require 'colorize'
 
 class Turn
 
@@ -30,13 +30,13 @@ class Turn
   def user_shot_result
     case
       when @computer.board.cells[@fire_selection].empty? == true
-        'miss'
+        'miss'.colorize(:blue)
       when  @computer.board.cells[@fire_selection].cell_contents[0].name == 'Submarine' && @computer.submarine.sunk?
-        'hit and sunk my Submarine'
+        'hit'.colorize(:red) + ' and' + ' sunk'.colorize(:red) + ' my Submarine' + "\u{1F480}"
       when @computer.board.cells[@fire_selection].cell_contents[0].name == 'Cruiser' && @computer.cruiser.sunk?
-        'hit and sunk my Cruiser'
+        'hit'.colorize(:red) + ' and' + ' sunk'.colorize(:red) + ' my Cruiser' + "\u{1F480}"
       when @computer.board.cells[@fire_selection].empty? == false
-        'hit'
+        'hit'.colorize(:red)
       end
     end
 
@@ -63,16 +63,16 @@ class Turn
     case
     when @user.board.cells[@computer_selection].empty? == true
       @turn_collection << 'miss'
-      'miss'
+      'miss'.colorize(:blue)
     when @user.board.cells[@computer_selection].cell_contents[0].name == 'Cruiser' && @user.cruiser.sunk?
       @turn_collection << 'hit and sunk your Cruiser'
-      'hit and sunk your Cruiser'
+      'hit'.colorize(:red) + ' and' + ' sunk'.colorize(:red) + ' your Cruiser' + "\u{1F480}"
     when @user.board.cells[@computer_selection].cell_contents[0].name == 'submarine' && @user.submarine.sunk?
       @turn_collection << 'hit and sunk your Submarine'
-      'hit and sunk your Submarine'
+      'hit'.colorize(:red) + ' and' ' sunk'.colorize(:red) + ' your Submarine' + "\u{1F480}"
     when @user.board.cells[@computer_selection].empty? == false
       @turn_collection << 'hit'
-      'hit'
+      'hit'.colorize(:red)
     end
   end
 
@@ -110,12 +110,12 @@ end
 
   def check_for_winner
     if @computer.cruiser.sunk? && @computer.submarine.sunk?
-      puts 'You won!'
+      puts "You won! \u{1F973}"
       display_both_boards
     else
       computer_smart_firing
       if @user.cruiser.sunk? && @user.submarine.sunk?
-        puts 'I won!'
+        puts "I won! \u{1F92A}"
         display_both_boards
       else
         display_both_boards

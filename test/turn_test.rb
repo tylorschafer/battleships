@@ -26,11 +26,10 @@ class TurnTest < Minitest::Test
   def test_user_fires_shot
     hit_cell = @computer.board.cells['A1']
     hit_cell.fire_upon
-    assert @turn.user_fires_shot
+    assert_nil @turn.user_fires_shot
   end
 
   def test_computer_fires_shot
-    binding.pry
     @coordinate_collection = ['C1','B1','A1']
     @user_coordinates = @user.board.coordinates
     @last_coordinate = @user_coordinates.find{|coor|(coor == @coordinate_collection.last)}
