@@ -30,13 +30,13 @@ class Turn
   def user_shot_result
     case
       when @computer.board.cells[@fire_selection].empty? == true
-        'miss'.colorize(:blue)
+        'miss'.blue
       when  @computer.board.cells[@fire_selection].cell_contents[0].name == 'Submarine' && @computer.submarine.sunk?
-        'hit'.colorize(:red) + ' and' + ' sunk'.colorize(:red) + ' my Submarine' + "\u{1F480}"
+        'hit'.red + ' and' + ' sunk'.red + ' my Submarine' + " \u{1F480}"
       when @computer.board.cells[@fire_selection].cell_contents[0].name == 'Cruiser' && @computer.cruiser.sunk?
-        'hit'.colorize(:red) + ' and' + ' sunk'.colorize(:red) + ' my Cruiser' + "\u{1F480}"
+        'hit'.red + ' and' + ' sunk'.red + ' my Cruiser' + " \u{1F480}"
       when @computer.board.cells[@fire_selection].empty? == false
-        'hit'.colorize(:red)
+        'hit'.red
       end
     end
 
@@ -55,7 +55,7 @@ class Turn
         next
       end
     end
-    user_response = puts "Your shot on #{@fire_selection} was a #{user_shot_result}."
+    user_response = puts "Your shot on #{@fire_selection} was a #{user_shot_result}"
     user_response
   end
 
@@ -63,16 +63,16 @@ class Turn
     case
     when @user.board.cells[@computer_selection].empty? == true
       @turn_collection << 'miss'
-      'miss'.colorize(:blue)
+      'miss'.blue
     when @user.board.cells[@computer_selection].cell_contents[0].name == 'Cruiser' && @user.cruiser.sunk?
       @turn_collection << 'hit and sunk your Cruiser'
-      'hit'.colorize(:red) + ' and' + ' sunk'.colorize(:red) + ' your Cruiser' + "\u{1F480}"
+      'hit'.red + ' and' + ' sunk'.red + ' your Cruiser' + " \u{1F480}"
     when @user.board.cells[@computer_selection].cell_contents[0].name == 'submarine' && @user.submarine.sunk?
       @turn_collection << 'hit and sunk your Submarine'
-      'hit'.colorize(:red) + ' and' ' sunk'.colorize(:red) + ' your Submarine' + "\u{1F480}"
+      'hit'.red + ' and' ' sunk'.red + ' your Submarine' + " \u{1F480}"
     when @user.board.cells[@computer_selection].empty? == false
       @turn_collection << 'hit'
-      'hit'.colorize(:red)
+      'hit'.red
     end
   end
 
@@ -104,7 +104,7 @@ end
           end
       end
     end
-    computer_response = puts "My shot on #{@computer_selection} was a #{computer_shot_result}."
+    computer_response = puts "My shot on #{@computer_selection} was a #{computer_shot_result}"
     computer_response
   end
 
