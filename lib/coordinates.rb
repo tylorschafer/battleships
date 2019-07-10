@@ -1,4 +1,3 @@
-
 class Coordinates
   attr_reader :x, :y, :x_array, :y_array
 
@@ -38,7 +37,7 @@ class Coordinates
       coords << letter + @y_array[num.to_i - 1]
     end
     end
-    coords.sort
+    coords
   end
 
   def run

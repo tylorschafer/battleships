@@ -2,16 +2,13 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
-require 'pry'
-
 
 class CellTest < Minitest::Test
 
   def setup
     @cell = Cell.new('B4')
-    @cruiser = Ship.new('Cruiser',3)
-    @cell_1 = Cell.new('B4')
     @cell_2 = Cell.new('C4')
+    @cruiser = Ship.new('Cruiser',3)
   end
 
   def test_cell_exsists
@@ -27,6 +24,7 @@ class CellTest < Minitest::Test
   end
 
   def test_cell_starts_empty
+    assert [], @cell.cell_contents
     assert @cell.empty?
   end
 
@@ -76,6 +74,6 @@ class CellTest < Minitest::Test
     assert true, @cruiser.sunk?
     assert 'X', @cell_2.render
     assert 'S', @cell_2.render
-    assert '.', @cell_1.render
+    assert '.', @cell.render
   end
 end

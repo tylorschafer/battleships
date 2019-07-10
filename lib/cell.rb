@@ -1,5 +1,4 @@
 class Cell
-
   attr_reader :coordinate, :cell_contents, :ship
 
   def initialize(coordinate)
@@ -8,7 +7,6 @@ class Cell
     @fired_upon = false
     @ship = ship
   end
-
 
   def empty?
     if @cell_contents.empty?

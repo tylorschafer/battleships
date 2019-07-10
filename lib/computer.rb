@@ -2,12 +2,15 @@ require './lib/ship'
 require './lib/board'
 require './lib/coordinates'
 require './lib/cell'
+require './lib/turn'
+require './lib/user'
+
 
 class Computer
-  attr_reader :board, :cruiser, :submarine
+  attr_reader :board, :cruiser, :submarine, :turn_collection
 
-  def initialize
-    @board = Board.new
+  def initialize(length, width)
+    @board = Board.new(length, width)
     @board.create_cells
     @cruiser = Ship.new('Cruiser', 3)
     @submarine = Ship.new('Submarine', 2)
