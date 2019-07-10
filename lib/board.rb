@@ -1,8 +1,10 @@
 class Board
   attr_reader :coordinates, :cells
 
-  def initialize
-    @coordinates = Coordinates.new.run
+  def initialize(length = 4, width = 4)
+    @length = length
+    @width = width
+    @coordinates = Coordinates.new(length, width).run
     @cells = create_cells
   end
 
@@ -23,16 +25,14 @@ class Board
   end
 
   def create_uniq_numbers(ship_coordinates)
-    split_chars_array = ship_coordinates.map{ |element|element.chars}
-    numbers_array = split_chars_array.flatten.find_all{ |char|char.to_i != 0}
+    numbers_array = ship_coordinates.map{ |element|element.gsub(/\D/, '')}
     @uniq_numbers = numbers_array.flatten.uniq
   end
 
   def create_uniq_letters(ship_coordinates)
-    split_chars_array = ship_coordinates.map{ |element|element.chars}
-    letter_array = split_chars_array.flatten.find_all{ |char|char.to_i == 0}
-    uniq_letters = letter_array.flatten.uniq
-    @uniq_letters = uniq_letters.map {|letter| letter.ord - 64}
+    letters_array = ship_coordinates.map{ |element|element.gsub(/\W/, '')}
+    ord_letters = letters_array.map {|letter| letter.ord - 64}
+    @uniq_letters = ord_letters.flatten.uniq
   end
 
   def consecutive_numbers?(ship)
@@ -74,7 +74,7 @@ class Board
   end
 
   def render(show = false)
-    uniq_number_cells = @cells.collect {|key,value| key.chars[1].to_i}.uniq
+    uniq_number_cells = @cells.collect {|key,value| key.gsub(/\D/, '').to_i}.uniq.sort
     @grouped_cells = @cells.group_by {|cell| cell[0][0]}
     if show == true
       @formatted_board = @grouped_cells.map do |key,value|
