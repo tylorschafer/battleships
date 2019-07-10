@@ -4,9 +4,9 @@ require './lib/board'
 require './lib/ship'
 require './lib/cell'
 require './lib/coordinates'
-require 'pry'
 
 class BoardTest < Minitest::Test
+  
   def setup
     @board = Board.new
     @cruiser = Ship.new('Cruiser', 3)
@@ -19,7 +19,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_exists
-    assert Board, @board
+    assert_instance_of Board, @board
   end
 
   def test_board_is_a_hash
@@ -34,8 +34,18 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_16_cells_and_key_is_cell
-    assert 16, @board.cells.count
+    assert_equal 16, @board.cells.count
     assert Cell, @board.cells['A1']
+    assert Cell, @board.cells['D4']
+  end
+
+  def test_variable_board_sizes
+    @big_board = Board.new(10, 10)
+
+    assert_equal 100, @big_board.cells.count
+    assert Cell, @big_board.cells['A10']
+    assert Cell, @big_board.cells['E6']
+    assert Cell, @big_board.cells['J10']
   end
 
   def test_valid_coordinate?
@@ -80,7 +90,7 @@ class BoardTest < Minitest::Test
     refute @board.consecutive_numbers?(@cruiser)
     @board.create_uniq_numbers(['A8','A9','A10'])
     @board.create_uniq_letters(['A8','A9','A10'])
-    # assert @board.consecutive_numbers?(@cruiser)
+    assert @board.consecutive_numbers?(@cruiser)
   end
 
   def test_consecutive_letters?
