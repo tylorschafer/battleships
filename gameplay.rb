@@ -61,10 +61,8 @@ def play_game
     turn.take
   end
   if @computer.cruiser.sunk? && @computer.submarine.sunk?
-
     puts 'You won!'
   elsif @user.cruiser.sunk? && @user.submarine.sunk?
-
     puts 'I won!'
   end
   start_game
