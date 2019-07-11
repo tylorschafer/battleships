@@ -89,7 +89,7 @@ end
     until @valid_choice == true
       if @turn_collection.last.include?('hit') == true && @turn_collection.last.include?('sunk') == false
           @computer_selection = user_coordinates[user_coordinates.index(last_coordinate) + 1]
-        if @user_cells[@computer_selection].fired_upon? == false
+        if @user.board.valid_coordinate?(@computer_selection) && @user_cells[@computer_selection].fired_upon? == false
           computer_take_shot
         else
           @computer_selection = @user.board.coordinates.sample

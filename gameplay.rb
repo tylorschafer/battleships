@@ -26,9 +26,9 @@ def play_game
   until valid_length == true
     puts 'Please enter the length for your board. (Minimum size 3, Maximum size 26)'
     user_length = gets.chomp.to_i
-      if !(3..26).include?user_length
-        puts 'I am sorry that is an invalid board size.'
-      elsif user_length <= 26
+      if user_length < 3 || user_length > 26
+        puts 'Sorry, that is an invalid board size.'
+      else
         valid_length == true
         break
       end
@@ -37,9 +37,9 @@ def play_game
   until valid_width == true
     puts 'Now please enter a width for your board. (Minimum size 3, Maximum size 10)'
     user_width = gets.chomp.to_i
-      if !(3..10).include?user_length
-        puts 'I am that is an invalid board size.'
-      elsif user_width <= 10
+      if user_width < 3 || user_width > 10
+        puts 'Sorry, that is an invalid board size.'
+      else
         valid_width = true
         break
       end
