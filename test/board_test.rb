@@ -6,7 +6,7 @@ require './lib/cell'
 require './lib/coordinates'
 
 class BoardTest < Minitest::Test
-  
+
   def setup
     @board = Board.new
     @cruiser = Ship.new('Cruiser', 3)
@@ -41,7 +41,6 @@ class BoardTest < Minitest::Test
 
   def test_variable_board_sizes
     @big_board = Board.new(10, 10)
-
     assert_equal 100, @big_board.cells.count
     assert Cell, @big_board.cells['A10']
     assert Cell, @big_board.cells['E6']
@@ -98,7 +97,6 @@ class BoardTest < Minitest::Test
     @board.create_uniq_letters(['A1','B1','C1'])
     assert @board.consecutive_letters?(@cruiser)
     refute @board.consecutive_letters?(@submarine)
-
     @board.create_uniq_numbers(['A1','B1','D1'])
     @board.create_uniq_letters(['A1','B1','D1'])
     refute @board.consecutive_letters?(@cruiser)

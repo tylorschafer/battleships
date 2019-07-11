@@ -14,6 +14,7 @@ class TurnTest < Minitest::Test
     @computer.board.create_cells
     @turn = Turn.new(@computer, @user)
   end
+
   def test_turn_exists
     assert_instance_of Turn, @turn
   end

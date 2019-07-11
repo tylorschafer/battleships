@@ -34,5 +34,4 @@ class BattleSummary
     end
     puts '====================PLAYER BOARD==================='.light_blue
   end
-
 end

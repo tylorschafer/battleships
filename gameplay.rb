@@ -18,7 +18,6 @@ def start_game
     puts 'Invalid input'
     start_game
   end
-
 end
 
 def play_game
@@ -45,13 +44,16 @@ def play_game
         break
       end
     end
+
   @computer = Computer.new(user_length, user_width)
   @computer.ship_placement(@computer.cruiser)
   @computer.ship_placement(@computer.submarine)
   @user = User.new(user_length, user_width)
+
   puts 'I have laid out my ships on the grid.'
   puts 'You now need to lay out your two ships on the grid.'
-  puts 'The Criser is three units long and the Submarine is two units long.'
+  puts 'The Cruiser is three units long and the Submarine is two units long.'
+
   @user.board.render(true)
   @user.cruiser_placement
   @user.submarine_placement
