@@ -87,7 +87,7 @@ end
     last_coordinate = user_coordinates.find{|coor|(coor == @coordinate_collection.last)}
     @valid_choice = false
     until @valid_choice == true
-      if @turn_collection.last.include?('hit') == true && @turn_collection.last.include?('sunk') == false
+      if @turn_collection.last(5).include?('hit') == true && @turn_collection.last.include?('sunk') == false
           @computer_selection = user_coordinates[user_coordinates.index(last_coordinate) + 1]
         if @user.board.valid_coordinate?(@computer_selection) && @user_cells[@computer_selection].fired_upon? == false
           computer_take_shot
