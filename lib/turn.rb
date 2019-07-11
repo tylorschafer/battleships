@@ -109,17 +109,16 @@ end
   end
 
   def check_for_winner
-    if @computer.cruiser.sunk? && @computer.submarine.sunk?
+    if (@computer.cruiser.sunk? && @computer.submarine.sunk?)
       puts "You won! \u{1F973}"
       display_both_boards
-    else
-      computer_smart_firing
-      if @user.cruiser.sunk? && @user.submarine.sunk?
+    elsif
+      @user.cruiser.sunk? && @user.submarine.sunk?
         puts "I won! \u{1F92A}"
         display_both_boards
-      else
+    else
+      computer_smart_firing
         display_both_boards
-      end
     end
   end
 
