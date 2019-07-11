@@ -32,6 +32,6 @@ class BattleSummary
     else
       puts "Player =>".light_blue + " #{@user.cruiser.name}".red  + " \u{2620} ".blink + " #{@user.submarine.name}".red  + " \u{2620} ".blink
     end
-    puts '====================PLAYER BOARD==================='.light_blue
+    puts '====================PLAYER BOARD=================='.light_blue
   end
 end

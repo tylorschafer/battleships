@@ -53,6 +53,12 @@ class Board
     end
   end
 
+  def overlapping_ships?(ship_coordinates)
+    if ship_coordinates.all? {|single_coord| @coordinates.include?(single_coord)} == true
+      ship_coordinates.all? {|coord| @cells[coord].empty?}
+    end
+  end
+
   def valid_placement?(ship, ship_coordinates)
       create_uniq_letters(ship_coordinates)
       create_uniq_numbers(ship_coordinates)
@@ -64,12 +70,6 @@ class Board
       ship_coordinates.each {|coord| @cells[coord].place_ship(ship)}
     else
       return false
-    end
-  end
-
-  def overlapping_ships?(ship_coordinates)
-    if ship_coordinates.all? {|single_coord| @coordinates.include?(single_coord)} == true
-      ship_coordinates.all? {|coord| @cells[coord].empty?}
     end
   end
 
