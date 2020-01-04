@@ -1,3 +1,5 @@
+![BattleshipsImage](/example.png)
+
 ## Battleships 
 
 Battleships is a command line interface recreation of the class board game Battleship. This CLI game allows users to create a game with a variable board size and has the exact gameplay flow of the board game. 
